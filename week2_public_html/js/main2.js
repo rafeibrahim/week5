@@ -50,15 +50,18 @@ const createCatCards = (cats) => {
     delButton.addEventListener('click', async () => {
       const fetchOptions = {
         method: 'DELETE',
+        
       };
       try {
         const response = await fetch(url + '/cat/' + cat.cat_id, fetchOptions);
+        console.log('first statement' + response);
+        
         const json = await response.json();
         console.log('delete response', json);
-        getCat();
+        getCat(); 
       }
       catch (e) {
-        console.log(e.message());
+        console.log(e.message);
       }
     });
 
@@ -126,7 +129,7 @@ addForm.addEventListener('submit', async (evt) => {
     method: 'POST',
     body: fd,
   };
-  const response = await fetch(url + '/cat', fetchOptions);
+  const response = await fetch(url + '/cat/', fetchOptions);
   const json = await response.json();
   console.log('add response', json);
   getCat();
@@ -151,7 +154,7 @@ modForm.addEventListener('submit', async (evt) => {
   };
 
   console.log(fetchOptions);
-  const response = await fetch(url + '/cat', fetchOptions);
+  const response = await fetch(url + '/cat/', fetchOptions);
   const json = await response.json();
   console.log('modify response', json);
   getCat();

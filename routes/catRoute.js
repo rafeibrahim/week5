@@ -9,20 +9,14 @@ const catController = require('../controllers/catController');
 
 router.get('/', catController.cat_list_get);
   
-router.get('/:id', (req, res) => {
-    res.send('you requested a cat whose is id ' + req.params.id + ' get request');
-  });
+router.get('/:id', catController.cat_get);
   
-  router.post('/imageUpload', upload.single('catImage'), catController.upload_cat);
+router.post('/', upload.single('cat'), catController.upload_cat);
 
+
+ router.put('/', catController.cat_update_get);
   
- router.put('/', (req, res) => {
-    res.send('put request reached');
-  });
-  
- router.delete('/', (req, res) => {
-    res.send('delete request reached');
-  });
+ router.delete('/:id', catController.cat_delete);
 
   module.exports = router;
 

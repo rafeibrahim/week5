@@ -6,7 +6,7 @@ const userController = require('../controllers/userController');
 
 // catRoute
 
-router.get('/', userController.user_get);
+router.get('/', userController.user_list_get);
   
 router.get('/:id', userController.user_get);
   
