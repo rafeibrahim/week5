@@ -4,6 +4,8 @@
 
 const catModel = require('../models/catModel');
 const userModel = require('../models/userModel');
+const resize = require('../utils/resize.js');
+const imageMeta = require('../utils/imageMeta');
 
 //const cats = catModel.cats;
 
@@ -24,11 +26,20 @@ const upload_cat = async (req, res) =>{
     // console.log(req.file);
     //const ownerID = await userModel.getUserId([req.body.owner]);
     //console.log(ownerID);
-   const params = [req.body.name, req.body.age, req.body.weight, req.body.owner, req.file.filename];
+    const coords = await imageMeta.getCoordinates(req.file.path);
+      console.log('coords', coords);
+    try{
+    await resize.makeThumbnail(req.file.path, ('thumbnails/' + req.file.filename), {width: 160, height: 160});
+   const params = [req.body.name, req.body.age, req.body.weight, req.body.owner, req.file.filename, coords];
    const response = await catModel.addCat(params);
     //console.log(response);
-    const cat = await catModel.getCat([response.insertId]);
-    res.json(cat);
+     const cat = await catModel.getCat([response.insertId]);
+     res.json(cat);
+    //await res.json(params);
+    }catch(e){
+      console.log('exif error', e );
+      res.status(400).json({message: 'error'});
+    }
 
     //console.log(req.body);
 }
