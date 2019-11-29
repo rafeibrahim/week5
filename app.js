@@ -16,8 +16,13 @@ app.use(express.static('uploads'));
 app.use('/thumbnails', express.static('thumbnails'));
 app.use('/public', express.static('week2_public_html'));
 
+require('./secure/server')(app);
+        app.listen(3001, () => {
+        console.log(`server app start? listening at port ${port}!`);
+        });
+
 app.use('/cat', catRoute);
 
 app.use('/user', userRoute);
 
-app.listen(port, () => console.log(`Example app listening on port ${port}!`));
+//app.listen(port, () => console.log(`Example app listening on port ${port}!`));

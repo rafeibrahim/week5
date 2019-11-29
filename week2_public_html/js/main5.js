@@ -1,6 +1,6 @@
 'use strict';
 //const url = 'http://localhost:3000'; // change url when uploading to server
-const url = 'http://10.114.32.138/app'
+const url = 'http://10.114.32.138/week5'
 
 // select existing html elements
 const loginWrapper = document.querySelector('#login-wrapper');
