@@ -9,6 +9,11 @@ const app = express();
 //const port = 3000;
 const port = 3001;
 
+require('./secure/server')(app);
+        app.listen(3001, () => {
+        console.log(`server app start? listening at port ${port}!`);
+        });
+
 app.use(cors());
 app.use(express.json()); // for parsing application/json
 app.use(express.urlencoded({extended: true})); // for parsing application/x-www-form-urlencoded
@@ -16,10 +21,7 @@ app.use(express.static('uploads'));
 app.use('/thumbnails', express.static('thumbnails'));
 app.use('/public', express.static('week2_public_html'));
 
-require('./secure/server')(app);
-        app.listen(3001, () => {
-        console.log(`server app start? listening at port ${port}!`);
-        });
+
 
 app.use('/cat', catRoute);
 
